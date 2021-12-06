@@ -13,7 +13,7 @@ resource "aws_lambda_function" "this" {
   timeout       = var.service_timeout
   tags          = local.tags
   package_type  = "Image"
-  image_uri     = "${aws_ecr_repository.this.repository_url}:${local.app_version}"
+  image_uri     = local.app_version != "" ? "${aws_ecr_repository.this.repository_url}:${local.app_version}" : "nullstone/example-lambda:latest"
 
   dynamic "vpc_config" {
     for_each = local.vpc_configs
