@@ -5,6 +5,6 @@ data "ns_app_env" "this" {
 }
 
 locals {
-  app_version     = data.ns_app_env.this.version
+  app_version     = coalesce(data.ns_app_env.this.version, "latest")
   service_runtime = "provided"
 }
