@@ -27,13 +27,3 @@ The maximum number of seconds the service is allotted to execute.
 The maximum this can be set is 900 seconds (15 minutes).
 EOF
 }
-
-variable "service_image" {
-  type        = string
-  default     = ""
-  description = <<EOF
-The docker image to deploy for this service.
-By default, this is blank, which means that an ECR repo is created and used.
-Use this variable to configure against docker hub, quay, etc.
-EOF
-}

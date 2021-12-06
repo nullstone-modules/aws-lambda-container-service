@@ -12,8 +12,7 @@ resource "aws_lambda_function" "this" {
   memory_size   = var.service_memory
   timeout       = var.service_timeout
   tags          = local.tags
-  s3_bucket     = aws_s3_bucket.artifacts.bucket
-  s3_key        = local.has_artifact ? local.artifact_key : aws_s3_bucket_object.placeholder.key
+  image_uri     = "${aws_ecr_repository.this.repository_url}:${local.app_version}"
 
   dynamic "vpc_config" {
     for_each = local.vpc_configs
