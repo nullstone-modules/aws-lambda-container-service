@@ -11,10 +11,9 @@ resource "aws_ecr_repository_policy" "this" {
 }
 
 data "aws_iam_policy_document" "ecr_lambda_access" {
-  statement
-  {
-    sid     = "LambdaECRImageRetrievalPolicy"
-    effect  = "Allow"
+  statement {
+    sid    = "LambdaECRImageRetrievalPolicy"
+    effect = "Allow"
     principals {
       identifiers = ["lambda.amazonaws.com"]
       type        = "Service"

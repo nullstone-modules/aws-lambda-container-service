@@ -39,7 +39,7 @@ output "log_reader" {
   sensitive   = true
 }
 
-output artifact_source {
+output "artifact_source" {
   value       = "docker"
   description = "string ||| This module pulls its source as a docker image from ECR."
 }
