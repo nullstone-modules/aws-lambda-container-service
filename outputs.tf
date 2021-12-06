@@ -1,5 +1,6 @@
 output "region" {
-  value = data.aws_region.this.name
+  description = "string |||"
+  value       = data.aws_region.this.name
 }
 output "deployer" {
   value = {
@@ -67,9 +68,11 @@ output "image_pusher" {
 }
 
 output "private_urls" {
-  value = [for url in try(local.capabilities.private_urls, []) : url["url"]]
+  description = "list(string) |||"
+  value       = [for url in try(local.capabilities.private_urls, []) : url["url"]]
 }
 
 output "public_urls" {
-  value = [for url in try(local.capabilities.public_urls, []) : url["url"]]
+  description = "list(string) |||"
+  value       = [for url in try(local.capabilities.public_urls, []) : url["url"]]
 }
