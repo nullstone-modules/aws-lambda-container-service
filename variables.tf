@@ -28,18 +28,12 @@ The maximum this can be set is 900 seconds (15 minutes).
 EOF
 }
 
-variable "service_runtime" {
+variable "service_image" {
   type        = string
+  default     = ""
   description = <<EOF
-The runtime of the service.
-This can be set to one of nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2.
-EOF
-}
-
-variable "service_handler" {
-  type        = string
-  description = <<EOF
-The entrypoint defined in the code that AWS executes when running the lambda.
-See https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-features.html#gettingstarted-features-programmingmodel for runtime-specific instructions.
+The docker image to deploy for this service.
+By default, this is blank, which means that an ECR repo is created and used.
+Use this variable to configure against docker hub, quay, etc.
 EOF
 }

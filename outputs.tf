@@ -2,32 +2,6 @@ output "region" {
   value = data.aws_region.this.name
 }
 
-output "artifacts_bucket_arn" {
-  value       = aws_s3_bucket.artifacts.arn
-  description = "string ||| The ARN of the created S3 bucket."
-}
-
-output "artifacts_bucket_name" {
-  value       = aws_s3_bucket.artifacts.bucket
-  description = "string ||| The name of the created S3 bucket."
-}
-
-output "artifacts_key_template" {
-  value       = "service-{{app-version}}.zip"
-  description = "string ||| Template for s3 object key that is used for Lambda function ({{app-version}} should be replaced with the app-version)"
-}
-
-output "deployer" {
-  value = {
-    name       = aws_iam_user.deployer.name
-    access_key = aws_iam_access_key.deployer.id
-    secret_key = aws_iam_access_key.deployer.secret
-  }
-
-  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to deploy to the S3 bucket."
-
-  sensitive = true
-}
 output "lambda_name" {
   value       = aws_lambda_function.this.function_name
   description = "string ||| Lambda Function Name"
@@ -52,6 +26,33 @@ output "log_reader" {
   value       = module.logs.reader
   description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read logs from Cloudwatch."
   sensitive   = true
+}
+
+output "image_repo_name" {
+  value       = try(aws_ecr_repository.this[0].name, "")
+  description = "string ||| "
+}
+
+output "image_repo_url" {
+  value       = try(aws_ecr_repository.this[0].repository_url, "")
+  description = "string ||| "
+}
+
+output "image_pusher" {
+  value = {
+    name       = try(aws_iam_user.image_pusher[0].name, "")
+    access_key = try(aws_iam_access_key.image_pusher[0].id, "")
+    secret_key = try(aws_iam_access_key.image_pusher[0].secret, "")
+  }
+
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to push images."
+
+  sensitive = true
+}
+
+output "service_image" {
+  value       = "${local.service_image}:${local.app_version}"
+  description = "string ||| "
 }
 
 output "private_urls" {

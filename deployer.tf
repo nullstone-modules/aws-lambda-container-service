@@ -1,54 +1,23 @@
-resource "aws_iam_user" "deployer" {
-  name = "deployer-${local.resource_name}"
-  tags = local.tags
+// ECS requires the user/role that initiates a deployment
+//   to have iam:PassRole access to the execution role
+// This grants the deployer user (created in the cluster module) access to this service's execution role
+// This is necessary for us to execute `nullstone deploy` on the CLI
+
+resource "aws_iam_user_policy_attachment" "deployer-execution" {
+  user       = local.deployer_name
+  policy_arn = aws_iam_policy.execution-pass-role.arn
 }
 
-resource "aws_iam_access_key" "deployer" {
-  user = aws_iam_user.deployer.name
+resource "aws_iam_policy" "execution-pass-role" {
+  name_prefix = "${local.resource_name}-pass-role"
+  policy      = data.aws_iam_policy_document.deployer-execution.json
 }
 
-// The actions listed are necessary to perform 'aws s3 sync'
-resource "aws_iam_user_policy" "deployer" {
-  name   = "AllowS3Deploy"
-  user   = aws_iam_user.deployer.name
-  policy = data.aws_iam_policy_document.deployer.json
-}
-
-data "aws_iam_policy_document" "deployer" {
+data "aws_iam_policy_document" "deployer-execution" {
   statement {
-    sid    = "AllowFindBucket"
-    effect = "Allow"
-
-    actions = [
-      "s3:ListBucket",
-      "s3:GetBucketLocation"
-    ]
-
-    resources = ["arn:aws:s3:::${local.artifacts_bucket_name}"]
-  }
-
-  statement {
-    sid    = "AllowEditObjects"
-    effect = "Allow"
-
-    actions = [
-      "s3:PutObject",
-      "s3:GetObject",
-      "s3:DeleteObject"
-    ]
-
-    resources = ["arn:aws:s3:::${local.artifacts_bucket_name}/*"]
-  }
-
-  statement {
-    sid    = "AllowLambdaDeploy"
-    effect = "Allow"
-
-    actions = [
-      "lambda:UpdateFunctionCode",
-      "lambda:PublishVersion",
-    ]
-
-    resources = [aws_lambda_function.this.arn]
+    sid       = "AllowPassRoleToExecutionRole"
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = [aws_iam_role.execution.arn]
   }
 }

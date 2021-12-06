@@ -6,4 +6,5 @@ data "ns_app_env" "this" {
 
 locals {
   app_version = data.ns_app_env.this.version
+  service_runtime = "provided"
 }

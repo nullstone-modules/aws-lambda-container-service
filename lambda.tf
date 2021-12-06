@@ -7,9 +7,8 @@ locals {
 
 resource "aws_lambda_function" "this" {
   function_name = local.resource_name
-  handler       = var.service_handler
   role          = aws_iam_role.executor.arn
-  runtime       = var.service_runtime
+  runtime       = local.service_runtime
   memory_size   = var.service_memory
   timeout       = var.service_timeout
   tags          = local.tags
