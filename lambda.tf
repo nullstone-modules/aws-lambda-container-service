@@ -3,6 +3,10 @@ locals {
     NULLSTONE_ENV = data.ns_workspace.this.env_name
   })
   env_vars = { for k, v in merge(local.standard_env_vars, var.service_env_vars) : k => v }
+
+  service_runtime   = "provided"
+  desired_image_uri = "${aws_ecr_repository.this.repository_url}:${local.app_version}"
+  current_image_uri = local.app_version != "" ? local.desired_image_uri : crane_image_tarball.bootstrap.name
 }
 
 resource "aws_lambda_function" "this" {
@@ -13,15 +17,11 @@ resource "aws_lambda_function" "this" {
   timeout       = var.service_timeout
   tags          = local.tags
   package_type  = "Image"
-  image_uri     = local.app_version != "" ? "${aws_ecr_repository.this.repository_url}:${local.app_version}" : "nullstone/example-lambda:latest"
+  image_uri     = local.current_image_uri
 
-  dynamic "vpc_config" {
-    for_each = local.vpc_configs
-
-    content {
-      security_group_ids = vpc_config.value["security_group_ids"]
-      subnet_ids         = vpc_config.value["subnet_ids"]
-    }
+  vpc_config {
+    security_group_ids = [aws_security_group.this.id]
+    subnet_ids         = local.private_subnet_ids
   }
 
   environment {

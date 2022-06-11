@@ -1,0 +1,13 @@
+org_name: nullstone
+name: aws-lambda-container-service
+friendly_name: Lambda Service (Container)
+description: Creates a Lambda application using an ECR docker registry.
+category: ""
+subcategory: ""
+provider_types:
+    - aws
+platform: lambda
+subplatform: container
+type: ""
+appCategories: []
+is_public: true

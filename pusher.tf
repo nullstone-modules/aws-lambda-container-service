@@ -1,6 +1,6 @@
 resource "aws_iam_user" "image_pusher" {
   name = "image-pusher-${local.resource_name}"
-  tags = data.ns_workspace.this.tags
+  tags = local.tags
 }
 
 resource "aws_iam_access_key" "image_pusher" {
