@@ -2,7 +2,7 @@
 // We need to find a better way to do this
 resource "aws_ecr_repository" "this" {
   name = local.resource_name
-  tags = data.ns_workspace.this.tags
+  tags = local.tags
 }
 
 resource "aws_ecr_repository_policy" "this" {
