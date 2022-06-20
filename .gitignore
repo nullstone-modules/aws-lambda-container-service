@@ -39,3 +39,5 @@ override.tf.json
 # example: *tfplan*
 __backend__.tf
 .nullstone/active-workspace.yml
+
+.terraform.lock.hcl
