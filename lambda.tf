@@ -11,7 +11,6 @@ locals {
 resource "aws_lambda_function" "this" {
   function_name = local.resource_name
   role          = aws_iam_role.executor.arn
-  runtime       = "provided"
   memory_size   = var.service_memory
   timeout       = var.service_timeout
   tags          = local.tags
