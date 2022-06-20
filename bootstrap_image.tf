@@ -13,5 +13,5 @@ provider "dockerless" {
 
 resource "dockerless_remote_image" "bootstrap" {
   source = "nullstone/lambda-bootstrap:latest"
-  target = "${aws_ecr_repository.this.repository_url}:bootstrap"
+  target = local.bootstrap_image_uri
 }

@@ -4,7 +4,8 @@ locals {
   })
   env_vars = { for k, v in merge(local.standard_env_vars, var.service_env_vars) : k => v }
 
-  effective_image_uri = "${aws_ecr_repository.this.repository_url}:${coalesce(local.app_version, "bootstrap")}"
+  bootstrap_image_uri = "${aws_ecr_repository.this.repository_url}:bootstrap"
+  effective_image_uri = local.app_version == "" ? dockerless_remote_image.bootstrap.target : "${aws_ecr_repository.this.repository_url}:${local.app_version}"
 }
 
 resource "aws_lambda_function" "this" {
