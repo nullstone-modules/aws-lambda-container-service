@@ -1,7 +1,8 @@
 output "region" {
-  description = "string |||"
+  description = "string ||| The region the lambda was created."
   value       = data.aws_region.this.name
 }
+
 output "deployer" {
   value = {
     name       = aws_iam_user.deployer.name
@@ -26,12 +27,12 @@ output "lambda_arn" {
 
 output "log_provider" {
   value       = "cloudwatch"
-  description = "string ||| "
+  description = "string ||| All logs are emitted to 'cloudwatch'."
 }
 
 output "log_group_name" {
   value       = module.logs.name
-  description = "string ||| "
+  description = "string ||| The name of the cloudwatch log group containing application logs."
 }
 
 output "log_reader" {
@@ -47,12 +48,12 @@ output "artifact_source" {
 
 output "image_repo_name" {
   value       = aws_ecr_repository.this.name
-  description = "string ||| "
+  description = "string ||| The name of the docker image for the application."
 }
 
 output "image_repo_url" {
   value       = aws_ecr_repository.this.repository_url
-  description = "string ||| "
+  description = "string ||| The URL for the docker image repository for the application."
 }
 
 output "image_pusher" {
@@ -68,11 +69,11 @@ output "image_pusher" {
 }
 
 output "private_urls" {
-  description = "list(string) |||"
+  description = "list(string) ||| A list of URLs only accessible inside the network."
   value       = [for url in try(local.capabilities.private_urls, []) : url["url"]]
 }
 
 output "public_urls" {
-  description = "list(string) |||"
+  description = "list(string) ||| A list of URLs accessible to the public"
   value       = [for url in try(local.capabilities.public_urls, []) : url["url"]]
 }
