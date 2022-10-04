@@ -1,8 +1,13 @@
 // This is a bit odd - we're creating a repository for every environment
 // We need to find a better way to do this
 resource "aws_ecr_repository" "this" {
-  name = local.resource_name
-  tags = local.tags
+  name         = local.resource_name
+  tags         = local.tags
+  force_delete = true
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 }
 
 resource "aws_ecr_repository_policy" "this" {
