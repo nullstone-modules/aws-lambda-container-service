@@ -20,6 +20,8 @@ data "aws_iam_policy_document" "deployer" {
     effect = "Allow"
 
     actions = [
+      "lambda:GetFunctionConfiguration",
+      "lambda:UpdateFunctionConfiguration",
       "lambda:UpdateFunctionCode",
       "lambda:PublishVersion",
     ]
