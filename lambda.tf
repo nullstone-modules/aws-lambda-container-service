@@ -18,6 +18,6 @@ resource "aws_lambda_function" "this" {
   }
 
   environment {
-    variables = local.env_vars
+    variables = local.all_env_vars
   }
 }

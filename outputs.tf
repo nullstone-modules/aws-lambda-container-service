@@ -70,10 +70,10 @@ output "image_pusher" {
 
 output "private_urls" {
   description = "list(string) ||| A list of URLs only accessible inside the network."
-  value       = [for url in try(local.capabilities.private_urls, []) : url["url"]]
+  value       = local.private_urls
 }
 
 output "public_urls" {
   description = "list(string) ||| A list of URLs accessible to the public"
-  value       = [for url in try(local.capabilities.public_urls, []) : url["url"]]
+  value       = local.public_urls
 }
