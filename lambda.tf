@@ -6,8 +6,8 @@ locals {
 resource "aws_lambda_function" "this" {
   function_name = local.resource_name
   role          = aws_iam_role.executor.arn
-  memory_size   = var.service_memory
-  timeout       = var.service_timeout
+  memory_size   = var.memory
+  timeout       = var.timeout
   tags          = local.tags
   package_type  = "Image"
   image_uri     = local.effective_image_uri
