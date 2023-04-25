@@ -1,4 +1,4 @@
-# 0.3.0 (Unreleased)
+# 0.3.0 (Apr 25, 2023)
 * Dropped `service_` prefix from variables.
 
 # 0.2.0 (Feb 28, 2023)
