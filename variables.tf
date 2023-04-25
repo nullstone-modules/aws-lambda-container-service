@@ -1,4 +1,4 @@
-variable "service_memory" {
+variable "memory" {
   type        = number
   default     = 128
   description = <<EOF
@@ -9,7 +9,7 @@ This means the default is 128 MiB or 0.125 GiB.
 EOF
 }
 
-variable "service_timeout" {
+variable "timeout" {
   type        = number
   default     = 3
   description = <<EOF
