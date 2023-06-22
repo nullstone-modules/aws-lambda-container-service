@@ -1,6 +1,7 @@
 locals {
   bootstrap_image_uri = "${aws_ecr_repository.this.repository_url}:bootstrap"
   effective_image_uri = local.app_version == "" ? dockerless_remote_image.bootstrap.target : "${aws_ecr_repository.this.repository_url}:${local.app_version}"
+  command             = length(var.command) > 0 ? var.command : null
 }
 
 resource "aws_lambda_function" "this" {
@@ -11,6 +12,10 @@ resource "aws_lambda_function" "this" {
   tags          = local.tags
   package_type  = "Image"
   image_uri     = local.effective_image_uri
+
+  image_config {
+    command = local.command
+  }
 
   vpc_config {
     security_group_ids = [aws_security_group.this.id]
