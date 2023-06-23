@@ -1,3 +1,6 @@
+# 0.3.1 (Jun 23, 2023)
+* Added optional `var.command` to override image `CMD`.
+
 # 0.3.0 (Apr 25, 2023)
 * Dropped `service_` prefix from variables.
 
