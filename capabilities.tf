@@ -49,7 +49,7 @@ locals {
     log_configurations = [
       {
         logDriver = "awslogs"
-        options = {
+        options   = {
           "awslogs-region"        = data.aws_region.this.name
           "awslogs-group"         = module.logs.name
           "awslogs-stream-prefix" = local.block_name
@@ -86,6 +86,12 @@ locals {
         batch_size        = null // number
         starting_position = null // string
         topic             = []   // list(string)
+      }
+    ]
+
+    dead_letter_queues = [
+      {
+        queue_arn = ""
       }
     ]
   }
