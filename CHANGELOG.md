@@ -1,3 +1,6 @@
+# 0.4.1 (Aug 08, 2023)
+* Updated `README.md` with application management info.
+
 # 0.4.0 (Aug 08, 2023)
 * Added compliance scanning.
 * Updated `README.md`.
