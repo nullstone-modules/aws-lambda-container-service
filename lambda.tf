@@ -1,4 +1,3 @@
-#bridgecrew:skip=CKV_AWS_173: Skipping "Check encryption settings for Lambda environmental variable". Nullstone doesn't put secrets into environment variables.
 #bridgecrew:skip=CKV_AWS_272: Skipping "Ensure AWS Lambda function is configured to validate code-signing". This module uses a docker image that cannot be code-signed.
 locals {
   bootstrap_image_uri = "${aws_ecr_repository.this.repository_url}:bootstrap"
@@ -15,6 +14,7 @@ resource "aws_lambda_function" "this" {
   package_type                   = "Image"
   image_uri                      = local.effective_image_uri
   reserved_concurrent_executions = 100
+  kms_key_arn                    = aws_kms_key.this.arn
 
   image_config {
     command = local.command
