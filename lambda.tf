@@ -1,4 +1,3 @@
-#bridgecrew:skip=CKV_AWS_272: Skipping "Ensure AWS Lambda function is configured to validate code-signing". This module uses a docker image that cannot be code-signed.
 locals {
   bootstrap_image_uri = "${aws_ecr_repository.this.repository_url}:bootstrap"
   effective_image_uri = local.app_version == "" ? dockerless_remote_image.bootstrap.target : "${aws_ecr_repository.this.repository_url}:${local.app_version}"
@@ -6,6 +5,7 @@ locals {
 }
 
 resource "aws_lambda_function" "this" {
+  #bridgecrew:skip=CKV_AWS_272: Skipping "Ensure AWS Lambda function is configured to validate code-signing". This module uses a docker image that cannot be code-signed.
   function_name                  = local.resource_name
   role                           = aws_iam_role.executor.arn
   memory_size                    = var.memory

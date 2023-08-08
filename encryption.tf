@@ -9,6 +9,7 @@ resource "aws_kms_key" "this" {
 data "aws_iam_policy_document" "encryption_key" {
   #bridgecrew:skip=CKV_AWS_109: Skipping "Permissions management without constraints". False positive as this is attached as a key policy and is implicitly constrained by the key.
   #bridgecrew:skip=CKV_AWS_111: Skipping "Write IAM policies without constraints". False positive as this is attached as a key policy and is implicitly constrained by the key.
+  #bridgecrew:skip=CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions". False positive as this is attached as a key policy and implicitly constrained by the key.
   statement {
     sid       = "Enable IAM User permissions"
     effect    = "Allow"

@@ -1,4 +1,4 @@
-# 0.3.2 (Aug 08, 2023)
+# 0.4.0 (Aug 08, 2023)
 * Added compliance scanning.
 * Updated `README.md`.
 * Added support for dead letter queue capabilities.
