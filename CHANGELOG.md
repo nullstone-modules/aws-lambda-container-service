@@ -1,6 +1,10 @@
 # 0.3.2 (Aug 08, 2023)
 * Added compliance scanning.
 * Updated `README.md`.
+* Added support for dead letter queue capabilities.
+* Configured ECR repository with immutability and encryption.
+* Enabled concurrency execution limit of 100.
+* Enabled X-Ray tracing.
 
 # 0.3.1 (Jun 23, 2023)
 * Added optional `var.command` to override image `CMD`.
