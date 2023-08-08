@@ -1,4 +1,5 @@
 module "logs" {
+  #bridgecrew:skip=CKV_TF_1: "Ensure Terraform module sources use a commit hash". We want to accept any updates to minor updates.
   source  = "nullstone-modules/logs/aws"
   version = "~>0.1.0"
 
