@@ -1,3 +1,6 @@
+# 0.4.2 (Aug 21, 2023)
+* Fixed deployment issue with encrypted ECR repo.
+
 # 0.4.1 (Aug 08, 2023)
 * Updated `README.md` with application management info.
 
