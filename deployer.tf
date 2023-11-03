@@ -1,4 +1,5 @@
 resource "aws_iam_user" "deployer" {
+  #bridgecrew:skip=CKV_AWS_273: "Ensure access is controlled through SSO and not AWS IAM defined users". SSO is unavailable.
   name = "deployer-${local.resource_name}"
   tags = local.tags
 }
@@ -34,5 +35,17 @@ data "aws_iam_policy_document" "deployer" {
     ]
 
     resources = [aws_lambda_function.this.arn]
+  }
+
+  // We must allow kms permission so that a container-based lambda can pull images from an encrypted ECR repo
+  statement {
+    sid       = "AllowEditKmsEncryptedLambda"
+    effect    = "Allow"
+    resources = [aws_kms_key.this.arn]
+
+    actions = [
+      "kms:CreateGrant",
+      "kms:GenerateDataKey",
+    ]
   }
 }

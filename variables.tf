@@ -17,3 +17,14 @@ The maximum number of seconds the service is allotted to execute.
 The maximum this can be set is 900 seconds (15 minutes).
 EOF
 }
+
+variable "command" {
+  type        = list(string)
+  default     = []
+  description = <<EOF
+This overrides the `CMD` specified in the image.
+Specify a blank list to use the image's `CMD`.
+Each token in the command is an item in the list.
+For example, `echo "Hello World"` would be represented as ["echo", "\"Hello World\""].
+EOF
+}

@@ -1,1 +1,4 @@
-FROM alpine
+FROM alpine:3
+
+USER default
+HEALTHCHECK NONE
