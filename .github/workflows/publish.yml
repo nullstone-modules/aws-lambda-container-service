@@ -38,4 +38,4 @@ jobs:
       - id: publish
         name: Publish
         run: |
-          nullstone modules publish --version=${{ env.MODULE_VERSION }} --include=placeholder.zip
+          nullstone modules publish --version=${{ env.MODULE_VERSION }}
