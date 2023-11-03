@@ -4,6 +4,8 @@ on:
     tags:
       - 'v*'
 
+permissions: read-all
+
 env:
   NULLSTONE_ORG: nullstone
   NULLSTONE_API_KEY: ${{ secrets.NULLSTONE_API_KEY }}
@@ -20,6 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      #- name: Run Bridgecrew
+      #  id: Bridgecrew
+      #  uses: bridgecrewio/bridgecrew-action@master
+      #  with:
+      #    api-key: ${{ secrets.BC_API_KEY }}
+
       - name: Set up Nullstone
         uses: nullstone-io/setup-nullstone-action@v0
 
@@ -30,4 +38,4 @@ jobs:
       - id: publish
         name: Publish
         run: |
-          nullstone modules publish --version=${{ env.MODULE_VERSION }}
+          nullstone modules publish --version=${{ env.MODULE_VERSION }} --include=placeholder.zip
