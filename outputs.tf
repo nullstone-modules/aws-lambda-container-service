@@ -41,6 +41,16 @@ output "log_reader" {
   sensitive   = true
 }
 
+output "metrics_reader" {
+  value       = module.logs.reader
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read metrics from Cloudwatch."
+  sensitive   = true
+}
+
+output "metrics_mappings" {
+  value = local.metrics_mappings
+}
+
 output "artifact_source" {
   value       = "docker"
   description = "string ||| This module pulls its source as a docker image from ECR."
