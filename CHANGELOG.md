@@ -1,5 +1,9 @@
-# 0.4.3 (Jan 16, 2024)
+# 0.4.4 (Jan 16, 2024)
 * Added metrics outputs to enable real-time monitoring.
+
+# 0.4.3 (Nov 03, 2023)
+* Added `invoke_arn` to `app_metadata` for capabilities.
+* Ensuring lambda has access to secrets.
 
 # 0.4.2 (Aug 21, 2023)
 * Fixed deployment issue with encrypted ECR repo.
