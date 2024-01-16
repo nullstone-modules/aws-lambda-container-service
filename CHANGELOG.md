@@ -1,3 +1,6 @@
+# 0.4.3 (Jan 16, 2024)
+* Added metrics outputs to enable real-time monitoring.
+
 # 0.4.2 (Aug 21, 2023)
 * Fixed deployment issue with encrypted ECR repo.
 
