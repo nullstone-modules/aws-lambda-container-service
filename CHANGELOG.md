@@ -1,3 +1,6 @@
+# 0.4.7 (Jan 24, 2024)
+* Fixed terraform lock file.
+
 # 0.4.6 (Jan 24, 2024)
 * Enabled `metrics_reader` to access Cloudwatch metrics.
 
