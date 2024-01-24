@@ -1,3 +1,6 @@
+# 0.4.5 (Jan 24, 2024)
+* Fixed secrets policy when no secrets are specified.
+
 # 0.4.4 (Jan 16, 2024)
 * Added metrics outputs to enable real-time monitoring.
 
