@@ -1,3 +1,6 @@
+# 0.4.6 (Jan 24, 2024)
+* Enabled `metrics_reader` to access Cloudwatch metrics.
+
 # 0.4.5 (Jan 24, 2024)
 * Fixed secrets policy when no secrets are specified.
 
