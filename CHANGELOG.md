@@ -1,3 +1,6 @@
+# 0.4.8 (Feb 01, 2024)
+* Fixed usage of `for_each` in secrets policy.
+
 # 0.4.7 (Jan 24, 2024)
 * Fixed terraform lock file.
 
