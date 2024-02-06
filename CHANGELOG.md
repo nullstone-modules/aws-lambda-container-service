@@ -1,3 +1,6 @@
+# 0.4.10 (Feb 06, 2024)
+* Added support for metrics in capabilities.
+
 # 0.4.9 (Feb 01, 2024)
 * Fixed secrets policy to set resources to `[<arn>, ...]` instead of `[[<arn>,...]]`.
 
