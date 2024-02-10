@@ -27,7 +27,9 @@ data "aws_iam_policy_document" "image_pusher" {
       "ecr:PutImage",
       "ecr:InitiateLayerUpload",
       "ecr:UploadLayerPart",
-      "ecr:CompleteLayerUpload"
+      "ecr:CompleteLayerUpload",
+      "ecr:DescribeImages",
+      "ecr:ListImages",
     ]
 
     resources = [aws_ecr_repository.this.arn]
