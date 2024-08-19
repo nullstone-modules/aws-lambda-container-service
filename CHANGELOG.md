@@ -1,3 +1,7 @@
+# 0.4.12 (Aug 19, 2024)
+* Added the ability to reference existing secrets using interpolation.
+* e.g. "{{ secret(arn-of-existing-secret) }}"
+
 # 0.4.11 (Feb 10, 2024)
 * Added permissions to list image tags in image repository.
 
