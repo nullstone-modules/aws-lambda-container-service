@@ -1,3 +1,6 @@
+# 0.4.15 (Feb 26, 2025)
+* Added `var.reserved_concurrency` to relax compliance for flexibility launching new lambda functions.
+
 # 0.4.14 (Feb 26, 2025)
 * Upgraded Terraform providers.
 

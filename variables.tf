@@ -28,3 +28,13 @@ Each token in the command is an item in the list.
 For example, `echo "Hello World"` would be represented as ["echo", "\"Hello World\""].
 EOF
 }
+
+variable "reserved_concurrency" {
+  type        = number
+  default     = -1
+  description = <<EOF
+The number of reserved concurrent executions for this Lambda function.
+This guarantees a minimum amount of concurrent executions for the function.
+`-1` removes limitations and `0` disables the lambda from being triggered
+EOF
+}

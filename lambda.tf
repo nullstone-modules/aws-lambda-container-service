@@ -13,7 +13,7 @@ resource "aws_lambda_function" "this" {
   tags                           = local.tags
   package_type                   = "Image"
   image_uri                      = local.effective_image_uri
-  reserved_concurrent_executions = 100
+  reserved_concurrent_executions = var.reserved_concurrency
   kms_key_arn                    = aws_kms_key.this.arn
 
   image_config {
