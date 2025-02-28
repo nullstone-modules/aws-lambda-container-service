@@ -1,3 +1,6 @@
+# 0.4.16 (Feb 27, 2025)
+* Fixed `topics` usage from `event_sources` in capabilities.
+
 # 0.4.15 (Feb 26, 2025)
 * Added `var.reserved_concurrency` to relax compliance for flexibility launching new lambda functions.
 
