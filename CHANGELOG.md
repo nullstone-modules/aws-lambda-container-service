@@ -1,3 +1,6 @@
+# 0.5.0 (Sep 22, 2025)
+* Upgraded Terraform providers.
+
 # 0.4.16 (Feb 27, 2025)
 * Fixed `topics` usage from `event_sources` in capabilities.
 

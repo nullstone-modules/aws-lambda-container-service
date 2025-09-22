@@ -1,6 +1,6 @@
 output "region" {
   description = "string ||| The region the lambda was created."
-  value       = data.aws_region.this.name
+  value       = data.aws_region.this.region
 }
 
 output "deployer" {
@@ -84,11 +84,11 @@ output "image_pusher" {
 }
 
 output "private_urls" {
-  description = "list(string) ||| A list of URLs only accessible inside the network."
   value       = local.private_urls
+  description = "list(string) ||| A list of URLs only accessible inside the network"
 }
 
 output "public_urls" {
-  description = "list(string) ||| A list of URLs accessible to the public"
   value       = local.public_urls
+  description = "list(string) ||| A list of URLs accessible to the public"
 }
