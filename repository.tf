@@ -8,7 +8,7 @@ resource "aws_ecr_repository" "this" {
 
   encryption_configuration {
     encryption_type = "KMS"
-    kms_key         = aws_kms_key.this.arn
+    kms_key         = module.scaffold.kms_key.arn
   }
 
   image_scanning_configuration {

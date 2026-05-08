@@ -7,14 +7,14 @@ locals {
 resource "aws_lambda_function" "this" {
   #bridgecrew:skip=CKV_AWS_272: Skipping "Ensure AWS Lambda function is configured to validate code-signing". This module uses a docker image that cannot be code-signed.
   function_name                  = local.resource_name
-  role                           = aws_iam_role.executor.arn
+  role                           = module.scaffold.executor.arn
   memory_size                    = var.memory
   timeout                        = var.timeout
   tags                           = local.tags
   package_type                   = "Image"
   image_uri                      = local.effective_image_uri
   reserved_concurrent_executions = var.reserved_concurrency
-  kms_key_arn                    = aws_kms_key.this.arn
+  kms_key_arn                    = module.scaffold.kms_key.arn
 
   image_config {
     command = local.command
