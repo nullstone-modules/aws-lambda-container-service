@@ -1,3 +1,6 @@
+# 0.6.1 (Jun 10, 2026)
+* Upgraded terraform providers.
+
 # 0.6.0 (May 08, 2026)
 * Switched to OpenTofu.
 * Migrated app scaffold to open-source module.

@@ -1,15 +1,3 @@
-terraform {
-  required_providers {
-    ns = {
-      source  = "nullstone-io/ns"
-      version = "~> 0.8.2"
-    }
-    dockerless = {
-      source = "nullstone-io/dockerless"
-    }
-  }
-}
-
 data "ns_workspace" "this" {}
 
 data "ns_agent" "this" {}
