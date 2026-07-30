@@ -1,5 +1,6 @@
 # 0.8.0 (Jul 30, 2026)
 * Added optional `notification` connection to configure monitoring on error rates.
+* Added image_repo_name to app metadata injected into capabilities.
 
 # 0.7.0 (Jun 18, 2026)
 * Upgraded capability scaffolding to reduce conflicts.
