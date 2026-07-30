@@ -23,5 +23,6 @@ locals {
     role_arn          = module.scaffold.executor.arn
     security_group_id = aws_security_group.this.id
     log_group_name    = module.scaffold.log_group.name
+    image_repo_name   = aws_ecr_repository.this.name
   })
 }

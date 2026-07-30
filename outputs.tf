@@ -5,7 +5,7 @@ output "region" {
 
 output "deployer" {
   value       = module.scaffold.deployer
-  description = "object({ role_arn: string, session_duration: number }) ||| An IAM role with explicit privilege to publish new Lambda versions. Assumable by the Nullstone agent."
+  description = "object({ role_arn: string, session_duration: number }) ||| An IAM role with explicit privilege to publish new Lambda versions and invoke the function. Assumable by the Nullstone agent."
 }
 
 output "lambda_name" {
