@@ -38,3 +38,14 @@ This guarantees a minimum amount of concurrent executions for the function.
 `-1` removes limitations and `0` disables the lambda from being triggered
 EOF
 }
+
+variable "alert_thresholds" {
+  type = object({
+    error_rate = optional(number, 5)
+  })
+  default     = {}
+  description = <<EOF
+Thresholds for CloudWatch alarms on the lambda function. Only active when a notification connection is provided.
+- error_rate: Percentage of invocations that error over a 5-minute period to trigger the alarm (default: 5%)
+EOF
+}
