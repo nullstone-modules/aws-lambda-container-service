@@ -4,6 +4,7 @@ friendly_name: Lambda Service (Container)
 description: Creates a Lambda application using an ECR docker registry.
 category: app
 subcategory: serverless
+app_type: generic
 provider_types:
     - aws
 platform: lambda
