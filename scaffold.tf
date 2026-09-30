@@ -12,7 +12,7 @@ module "scaffold" {
   lambda_function_arn = aws_lambda_function.this.arn
   ecr_repository_arn  = aws_ecr_repository.this.arn
   secret_arns = concat(
-    values(local.existing_secret_refs),
+    values(data.ns_env_values.this.unmanaged_secret_refs),
     [for s in aws_secretsmanager_secret.app_secret : s.arn],
   )
 }
