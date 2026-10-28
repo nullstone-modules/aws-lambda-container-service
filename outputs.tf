@@ -30,8 +30,7 @@ output "log_group_name" {
 
 output "log_reader" {
   value       = module.scaffold.log_reader
-  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read logs from Cloudwatch."
-  sensitive   = true
+  description = "object({ role_arn: string, session_duration: number }) ||| An AWS Role with explicit privilege to read logs from Cloudwatch."
 }
 
 output "metrics_provider" {
@@ -41,8 +40,7 @@ output "metrics_provider" {
 
 output "metrics_reader" {
   value       = module.scaffold.log_reader
-  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read metrics from Cloudwatch."
-  sensitive   = true
+  description = "object({ role_arn: string, session_duration: number }) ||| An AWS Role with explicit privilege to read metrics from Cloudwatch."
 }
 
 output "metrics_mappings" {
