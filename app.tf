@@ -10,14 +10,16 @@ locals {
 
 locals {
   lambda_arn = "arn:aws:lambda:${data.aws_region.this.region}:${data.aws_caller_identity.this.account_id}:function:${local.resource_name}"
-  invoke_arn = "arn:aws:apigateway:${data.aws_region.this.region}:lambda:path/2015-03-31/functions/${local.lambda_arn}/invocations"
+  // With SnapStart, capabilities must invoke the alias; the unqualified function is `$LATEST`, which has no snapshot.
+  target_arn = var.snap_start ? "${local.lambda_arn}:${local.live_alias_name}" : local.lambda_arn
+  invoke_arn = "arn:aws:apigateway:${data.aws_region.this.region}:lambda:path/2015-03-31/functions/${local.target_arn}/invocations"
   app_metadata = tomap({
     // Inject app metadata into capabilities here (e.g. security_group_id, role_name)
     function_name = local.resource_name
     // We can't use aws_lambda_function.this.arn because it will create a cycle lambda => env => capabilities => lambda
     // NOTE: This *may* introduce a race condition for newly-launched lambdas
     //    e.g. api gateway capability adds an `aws_lambda_permission` before the lambda exists
-    function_arn      = local.lambda_arn
+    function_arn      = local.target_arn
     invoke_arn        = local.invoke_arn
     role_name         = module.scaffold.executor.name
     role_arn          = module.scaffold.executor.arn

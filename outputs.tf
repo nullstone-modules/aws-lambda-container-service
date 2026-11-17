@@ -18,6 +18,16 @@ output "lambda_arn" {
   description = "string ||| Lambda Function ARN"
 }
 
+output "lambda_alias" {
+  value       = var.snap_start ? aws_lambda_alias.live[0].name : ""
+  description = "string ||| The alias that receives traffic. Empty unless SnapStart is enabled. When set, a deploy publishes a new version and moves this alias to it."
+}
+
+output "lambda_versions_to_keep" {
+  value       = var.versions_to_keep
+  description = "number ||| How many published versions a deploy keeps when it removes old ones. Only used when `lambda_alias` is set."
+}
+
 output "log_provider" {
   value       = "cloudwatch"
   description = "string ||| All logs are emitted to 'cloudwatch'."

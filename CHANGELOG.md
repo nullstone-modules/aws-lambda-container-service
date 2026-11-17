@@ -1,3 +1,9 @@
+# 0.11.0 (Nov 17, 2026)
+* Added `snap_start` variable to enable Lambda SnapStart. When enabled, the module publishes versions, creates a `live` alias, and points every trigger and ingress at the alias.
+* Added `versions_to_keep` variable (default `3`) to control how many published versions a deploy keeps.
+* Added `lambda_alias` and `lambda_versions_to_keep` outputs. When `lambda_alias` is set, a deploy publishes a new version, waits for it to be ready, and moves the alias to it.
+* With `snap_start` left at its default, existing apps see no resource changes.
+
 # 0.10.1 (Nov 17, 2026)
 * Added Lambda SnapStart opt-in label to the bootstrap image.
 

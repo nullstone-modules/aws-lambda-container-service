@@ -9,7 +9,7 @@ locals {
 resource "aws_lambda_event_source_mapping" "caps" {
   for_each = local.event_sources
 
-  function_name    = aws_lambda_function.this.function_name
+  function_name    = var.snap_start ? aws_lambda_alias.live[0].arn : aws_lambda_function.this.function_name
   event_source_arn = each.value.source_arn
   enabled          = try(each.value.enabled, true)
 

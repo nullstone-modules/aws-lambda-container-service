@@ -39,6 +39,19 @@ This application module supports various capabilities to handle execution of a L
 - Trigger: Enable events to execute Lambda (e.g. Cron Trigger, SQS Queue)
 - CLI Execution: `nullstone exec` (See [`exec`](https://docs.nullstone.io/getting-started/cli/docs.html#exec) for more information)
 
+## SnapStart
+
+Set `snap_start = true` to reduce cold start times with [Lambda SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
+AWS initializes the function once per deploy, takes a snapshot, and resumes from that snapshot on a cold start.
+
+- **Your image must opt in.** AWS base images for Java 11+, Python 3.12+, and .NET 8+ work as-is.
+  Any other image needs `LABEL com.amazonaws.lambda.feature.snapstart="Allow"` in its Dockerfile (or must implement the [restore runtime API](https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks-custom.html)). Without it, the deploy fails.
+- **Traffic goes through an alias.** SnapStart does not apply to `$LATEST`, so this module creates a `live` alias and points every trigger and ingress at it.
+  Each deploy publishes a new version, waits for AWS to snapshot it, then moves the alias. Deploys take longer as a result.
+- **Old versions are removed.** A deploy keeps the newest `versions_to_keep` versions (default 3). AWS charges for each stored snapshot and for each restore.
+- **Initialization runs once, not per cold start.** Anything unique or short-lived created during initialization (random seeds, connections, temporary credentials) is shared by every environment restored from the snapshot. Create those in the handler or in an after-restore hook.
+- SnapStart cannot be combined with provisioned concurrency, EFS, or more than 512 MB of ephemeral storage.
+
 ## Logs
 
 Logs are automatically emitted to AWS Cloudwatch Log Group: `/aws/lambda/<function-name>`.

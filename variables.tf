@@ -39,6 +39,34 @@ This guarantees a minimum amount of concurrent executions for the function.
 EOF
 }
 
+variable "snap_start" {
+  type        = bool
+  default     = false
+  description = <<EOF
+Enable Lambda SnapStart to reduce cold start times.
+AWS initializes the function once per deploy, snapshots it, and resumes from that snapshot on a cold start.
+The image must opt in: AWS base images for Java 11+, Python 3.12+, and .NET 8+ work as-is;
+any other image needs `LABEL com.amazonaws.lambda.feature.snapstart="Allow"` in its Dockerfile, or the deploy fails.
+Deploys take longer because AWS snapshots each new version before it receives traffic.
+AWS charges for each stored snapshot and for each restore.
+EOF
+}
+
+variable "versions_to_keep" {
+  type        = number
+  default     = 3
+  description = <<EOF
+The number of published versions to keep when SnapStart is enabled, including the one receiving traffic.
+Each deploy publishes a new version and removes older ones beyond this count.
+Every kept version has a stored snapshot that AWS charges for.
+EOF
+
+  validation {
+    condition     = var.versions_to_keep >= 1
+    error_message = "versions_to_keep must be at least 1."
+  }
+}
+
 variable "alert_thresholds" {
   type = object({
     error_rate = optional(number, 5)
