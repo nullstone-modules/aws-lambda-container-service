@@ -1,3 +1,6 @@
+# 0.10.1 (Nov 17, 2026)
+* Added Lambda SnapStart opt-in label to the bootstrap image.
+
 # 0.10.0 (Oct 28, 2026)
 * Switched the log reader from an IAM User with static access keys to an IAM Role assumed by the Nullstone agent.
 * `log_reader` and `metrics_reader` outputs are no longer sensitive, so stack members below Architect can view logs and metrics.
